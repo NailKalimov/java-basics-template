@@ -18,13 +18,7 @@ public class SimpleMathService implements MathService {
 
     @Override
     public int compare(int value1, int value2) {
-        if (value1 > value2) {
-            return 1;
-        } else if (value1 < value2) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(value1, value2);
     }
 
     /**
@@ -141,11 +135,10 @@ public class SimpleMathService implements MathService {
     @Override
     public boolean isPrimary(int number) {
         boolean isPrime = true;
-        int remainder = 0;
         for (int i = 2; i <= number / 2; i++) {
-            remainder = number % i;
-            if (remainder == 0) {
+            if (number % i == 0) {
                 isPrime = false;
+                break;
             }
         }
         return isPrime;
