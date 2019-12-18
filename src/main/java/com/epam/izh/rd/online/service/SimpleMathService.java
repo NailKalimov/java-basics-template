@@ -37,7 +37,7 @@ public class SimpleMathService implements MathService {
     @Override
     public int maxFrom(int[] values) {
         int indexOfMax = 0;
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 1; i < values.length; i++) {
             if (values[i] > values[indexOfMax]) {
                 indexOfMax = i;
             }
@@ -89,7 +89,7 @@ public class SimpleMathService implements MathService {
     @Override
     public long calcFactorial(int initialVal) {
         long factorial = 1;
-        for (int i = initialVal; i != 0; i--) {
+        for (int i = 1; i <=initialVal; i++) {
             factorial *= i;
         }
         return factorial;
