@@ -1,19 +1,24 @@
 package com.epam.izh.rd.online.service;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SimpleMathService implements MathService {
 
     /**
      * Метод возвращает 0, если value1 = value2.
      * Метод возвращает -1, если value1 < value2.
      * Метод возвращает 1, если value1 > value2.
-     *
+     * <p>
      * Например для (-1, -1) метод должен вернуть 0;
      * Например для (-3, -1) метод должен вернуть -1;
      * Например для (3, 1) метод должен вернуть 1;
      */
+
     @Override
     public int compare(int value1, int value2) {
-        return -2;
+        return Integer.compare(value1, value2);
     }
 
     /**
@@ -22,7 +27,7 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int value1, int value2) {
-        return -1;
+        return Math.max(value1, value2);
     }
 
     /**
@@ -31,7 +36,13 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int[] values) {
-        return -1;
+        int indexOfMax = 0;
+        for (int i = 1; i < values.length; i++) {
+            if (values[i] > values[indexOfMax]) {
+                indexOfMax = i;
+            }
+        }
+        return values[indexOfMax];
     }
 
     /**
@@ -40,7 +51,11 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int sum(int[] values) {
-        return -1;
+        int sum = 0;
+        for (int value : values) {
+            sum += value;
+        }
+        return sum;
     }
 
     /**
@@ -49,7 +64,21 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] getEvenDigits(int[] values) {
-        return new int[]{};
+        int countOfEvenNumbers = 0;
+        for (int n : values) {
+            if (n % 2 == 0) {
+                countOfEvenNumbers++;
+            }
+        }
+        int[] resultArray = new int[countOfEvenNumbers];
+        int i = 0;
+        for (int n : values) {
+            if (n % 2 == 0) {
+                resultArray[i] = n;
+                i++;
+            }
+        }
+        return resultArray;
     }
 
     /**
@@ -59,22 +88,32 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFactorial(int initialVal) {
-        return -1L;
+        long factorial = 1;
+        for (int i = 1; i <=initialVal; i++) {
+            factorial *= i;
+        }
+        return factorial;
     }
 
     /**
      * Метод возвращает число, которе находится на заданной позиции (счет начинается с нуля) в ряду фибоначчи.
-     *
+     * <p>
      * Ряд фибоначчи - ряд, следующие элементы которого состоят из суммы двух предыдущих.
      * Ряд начинается 0 и 1.
      * Пример 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ...
-     *
+     * <p>
      * Для числа 9 метод должен вернуть 34
      * Для числа 0 метод должен вернуть 0
      */
     @Override
     public long calcFibonacci(int number) {
-        return -1L;
+        long a = 0;
+        long b = 1;
+        for (int i = 0; i < number; i++) {
+            b += a;
+            a = b - a;
+        }
+        return a;
     }
 
     /**
@@ -83,27 +122,39 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] sort(int[] values) {
-        return new int[]{};
+        Arrays.sort(values);
+        return values;
     }
 
     /**
      * Метод определяет, является ли заданное число простым.
      * Простое число - число, которое делится только на 1 и на само себя.
-     *
+     * <p>
      * Например для числа 22 вернется false, а для числа 23 true.
      */
     @Override
     public boolean isPrimary(int number) {
-        return false;
+        boolean isPrime = true;
+        for (int i = 2; i <= number / 2; i++) {
+            if (number % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        return isPrime;
     }
 
     /**
      * Метод возвращает массив, в котором элементы расположены в обратном порядке.
-     *
+     * <p>
      * Например для массива {-1, -3, 4, 8, 5, 22, -5} метод вернет {-5, 22, 5, 8, 4, -3, -1}
      */
     @Override
     public int[] reverseArray(int[] values) {
-        return new int[]{};
+        int[] valuesReverse = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            valuesReverse[i] = values[values.length - i - 1];
+        }
+        return valuesReverse;
     }
 }
